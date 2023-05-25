@@ -1,0 +1,15 @@
+name: moderator_plugin
+version: '${project.version}'
+main: me.shafi.moderator_plugin.Moderator_plugin
+api-version: 1.19
+commands:
+  ban:
+    description: "ban player"
+  tempban:
+    description: "temporarily bans player"
+    aliases:
+      - "tban"
+  unban:
+    description: "unbans player"
+    aliases:
+      - "pardon"
