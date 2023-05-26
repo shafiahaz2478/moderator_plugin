@@ -3,20 +3,17 @@ package me.shafi.moderator_plugin.commands;
 import me.shafi.moderator_plugin.Moderator_plugin;
 import me.shafi.moderator_plugin.utils.ChatUtils;
 import me.shafi.moderator_plugin.utils.DurationUtils;
-import org.bukkit.BanList;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import java.util.Arrays;
-import java.util.Date;
 
 import static me.shafi.moderator_plugin.utils.DurationUtils.parseDuration;
 
-public class TempBanCommand implements CommandExecutor {
+public class TempMuteCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String arg, String[] args){
@@ -32,17 +29,16 @@ public class TempBanCommand implements CommandExecutor {
             if(args.length >= 3){
                 reason = ChatUtils.format( String.join(" ", Arrays.copyOfRange(args, 2, args.length)));
             }
-            if(target.hasPlayedBefore()){
-                BanList banList = Bukkit.getBanList(BanList.Type.NAME);
-                long expiration = System.currentTimeMillis() + duration;
+            if(target.hasPlayedBefore()) {
+                if(Moderator_plugin.muteManager.getMuteStatus(target.getName()).isMuted()){
+                    Moderator_plugin.muteManager.unMutePlayer(target.getName());
+                }
+                Moderator_plugin.muteManager.mutePlayer(target.getName(), duration , reason);
+                Moderator_plugin.logManager.logTempMute(target.getName(), duration , reason);
 
-
-                banList.addBan(target.getName(), reason, new Date(expiration), sender.getName());
-                Moderator_plugin.logManager.logTempBan(target.getName() , duration , reason);
-                target.getPlayer().kickPlayer("you been banned for " + DurationUtils.formatDuration(duration) +" for: " + reason);
-                sender.sendMessage(ChatUtils.format("&6(!)&a" + target.getName() + " has been banned for " + DurationUtils.formatDuration(duration) +" for: " + reason));
+                sender.sendMessage(ChatUtils.format("&6(!)&a" + target.getName() + " has been muted for " + DurationUtils.formatDuration(duration) +" for: " + reason));
             }else{
-                sender.sendMessage(ChatUtils.format( "&6(!)&cPlayer " + target.getName() + "does not exist"));
+                sender.sendMessage(ChatUtils.format("&6(!)&cPlayer " + target.getName() + "does not exist"));
             }
 
         }

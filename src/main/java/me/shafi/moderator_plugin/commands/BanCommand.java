@@ -1,5 +1,6 @@
 package me.shafi.moderator_plugin.commands;
 
+import me.shafi.moderator_plugin.Moderator_plugin;
 import me.shafi.moderator_plugin.utils.ChatUtils;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -15,23 +16,24 @@ public class BanCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String arg, String[] args) {
         if(!sender.hasPermission("moderator.ban")){
-            sender.sendMessage(ChatUtils.format("&cYou are not allowed to run this command"));
+            sender.sendMessage(ChatUtils.format("&6(!)&cYou are not allowed to run this command"));
             return false;
         }
         if(args.length >= 1){
             OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
-            String reason = ChatUtils.format("&cBan Hammer has spoken"); //default reason
+            String reason = "Ban Hammer has spoken"; //default reason
             if(args.length >= 2){
-                reason = ChatUtils.format("&c" + String.join(" ", Arrays.copyOfRange(args, 1, args.length)));
+                reason = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
             }
             if(target.hasPlayedBefore()){
                 BanList banList = Bukkit.getBanList(BanList.Type.NAME);
 
                 banList.addBan(target.getName(), reason, null, sender.getName());
-                target.getPlayer().kickPlayer("you been banned for: " + reason);
-                sender.sendMessage(target.getName() + " has been banned for: " + reason);
+                Moderator_plugin.logManager.logBan(target.getName() , reason);
+                target.getPlayer().kickPlayer(ChatUtils.format("you been banned for: " + reason));
+                sender.sendMessage( ChatUtils.format("&6(!)&a"+target.getName() + " has been banned for: " + reason));
             }else{
-                sender.sendMessage("Player " + target.getName() + "does not exist");
+                sender.sendMessage(ChatUtils.format("&6(!)&c Player " + target.getName() + "does not exist"));
             }
 
         }

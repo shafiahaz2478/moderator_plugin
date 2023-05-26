@@ -13,3 +13,15 @@ commands:
     description: "unbans player"
     aliases:
       - "pardon"
+  mute:
+    description: "mutes player"
+  unmute:
+    description: "unmutes player"
+  tempmute:
+    description: "temporarily mutes player"
+    aliases:
+      - "tmute"
+  kick:
+    description: "kicks player"
+  history:
+    description: "gives the punishment log of a player"
