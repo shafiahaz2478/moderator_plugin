@@ -46,6 +46,9 @@ public class LogManager {
         logAction(ActionType.TEMPBAN, duration, playerName,  reason);
     }
 
+    public void logblackList(String playerName, String reason) {
+        logAction(ActionType.BlackList,-1 , playerName,  reason);
+    }
     public void logKick(String playerName, String reason) {
         logAction(ActionType.KICK, -1, playerName,  reason);
     }
@@ -104,6 +107,7 @@ public class LogManager {
 enum ActionType {
     BAN,
     TEMPBAN,
+    BlackList,
     MUTE,
     TEMPMUTE,
     KICK

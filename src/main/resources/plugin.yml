@@ -9,6 +9,8 @@ commands:
     description: "temporarily bans player"
     aliases:
       - "tban"
+  blacklist:
+    description: "BlackList Player IP"
   unban:
     description: "unbans player"
     aliases:

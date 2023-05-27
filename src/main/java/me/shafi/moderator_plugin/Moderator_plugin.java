@@ -55,6 +55,7 @@ public final class Moderator_plugin extends JavaPlugin {
         getCommand("ban").setExecutor(new BanCommand());
         getCommand("unban").setExecutor(new UnBanCommand());
         getCommand("tempban").setExecutor(new TempBanCommand());
+        getCommand("blacklist").setExecutor(new BlackListCommand());
         getCommand("mute").setExecutor(new MuteCommand());
         getCommand("unmute").setExecutor(new UnMuteCommand());
         getCommand("tempmute").setExecutor(new TempMuteCommand());

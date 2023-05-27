@@ -26,7 +26,7 @@ public class UnBanCommand implements CommandExecutor {
             }
 
             if(target.hasPlayedBefore()){
-                BanList banList = Bukkit.getBanList(BanList.Type.NAME);
+                BanList banList = Bukkit.getBanList(BanList.Type.IP);
 
                 banList.pardon(target.getName());
 
