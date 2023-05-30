@@ -28,9 +28,10 @@ public class BlackListCommand implements CommandExecutor {
             if(target.isOnline()){
                 BanList banList = Bukkit.getBanList(BanList.Type.IP);
 
-                banList.addBan(target.getAddress().getHostName(), reason, null, sender.getName());
+                banList.addBan(target.getAddress().getHostName(), ChatUtils.format("&c" + reason), null, sender.getName());
+                Bukkit.getBanList(BanList.Type.NAME).addBan(target.getName() , ChatUtils.format("&c" + reason) , null , sender.getName());
                 Moderator_plugin.logManager.logblackList(target.getName() , reason);
-                target.getPlayer().kickPlayer(ChatUtils.format("you been banned for: " + reason));
+                target.getPlayer().kickPlayer(ChatUtils.format("&6You been banned for: " + "&c" + reason));
                 sender.sendMessage( ChatUtils.format("&6(!)&a"+target.getName() + " has been banned for: " + reason));
             }else{
                 sender.sendMessage(ChatUtils.format("&6(!)&c Player " + target.getName() + "does not exist"));

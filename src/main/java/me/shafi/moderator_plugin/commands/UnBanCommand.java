@@ -22,11 +22,12 @@ public class UnBanCommand implements CommandExecutor {
         if(args.length >= 1){
             OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
             if(!target.isBanned()){
+                sender.sendMessage(ChatUtils.format("&6(!)&cPlayer" + target.getName() + "is not banned"));
                 return true;
             }
 
             if(target.hasPlayedBefore()){
-                BanList banList = Bukkit.getBanList(BanList.Type.IP);
+                BanList banList = Bukkit.getBanList(BanList.Type.NAME);
 
                 banList.pardon(target.getName());
 

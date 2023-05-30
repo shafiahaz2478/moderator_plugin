@@ -29,7 +29,7 @@ public class KickCommand implements CommandExecutor {
             if(target.isOnline()) {
 
                 Moderator_plugin.logManager.logKick(target.getName(), reason);
-                target.kickPlayer(ChatUtils.format("you been banned for: " + reason));
+                target.kickPlayer(ChatUtils.format("&6You been kicked for: " + "&c" + reason));
 
                 sender.sendMessage(ChatUtils.format( "&6(!)&a" +target.getName() + " has been muted for: " + reason));
             }else{

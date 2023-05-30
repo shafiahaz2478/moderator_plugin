@@ -28,9 +28,9 @@ public class BanCommand implements CommandExecutor {
             if(target.hasPlayedBefore()){
                 BanList banList = Bukkit.getBanList(BanList.Type.NAME);
 
-                banList.addBan(target.getName(), reason, null, sender.getName());
+                banList.addBan(target.getName(), ChatUtils.format("&c" + reason), null, sender.getName());
                 Moderator_plugin.logManager.logBan(target.getName() , reason);
-                target.getPlayer().kickPlayer(ChatUtils.format("you been banned for: " + reason));
+                target.getPlayer().kickPlayer(ChatUtils.format("&6You been banned for: " + "&c" + reason));
                 sender.sendMessage( ChatUtils.format("&6(!)&a"+target.getName() + " has been banned for: " + reason));
             }else{
                 sender.sendMessage(ChatUtils.format("&6(!)&c Player " + target.getName() + "does not exist"));
