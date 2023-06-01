@@ -30,7 +30,7 @@ public class MuteCommand implements CommandExecutor {
                 if(Moderator_plugin.muteManager.getMuteStatus(target.getName()).isMuted()){
                     Moderator_plugin.muteManager.unMutePlayer(target.getName());
                 }
-                Moderator_plugin.muteManager.mutePlayer(target.getName(), reason);
+                Moderator_plugin.muteManager.mutePlayer(target, reason);
                 Moderator_plugin.logManager.logMute(target.getName(), reason);
 
                 sender.sendMessage(ChatUtils.format("&6(!)&a" + target.getName() + " has been muted for: " + reason));

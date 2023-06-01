@@ -19,12 +19,12 @@ public class UnMuteCommand implements CommandExecutor {
         if(args.length >= 1){
             OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
 
-            if(Moderator_plugin.muteManager.getMuteStatus(target.getName()).isMuted()){
-                Moderator_plugin.muteManager.unMutePlayer(target.getName());
+            if(Moderator_plugin.muteManager.getMuteStatus(target.getUniqueId().toString()).isMuted()){
+                Moderator_plugin.muteManager.unMutePlayer(target.getUniqueId().toString());
 
                 sender.sendMessage(ChatUtils.format("&6(!)&a" +target.getName() + " has been unmuted"));
             }else{
-                sender.sendMessage(ChatUtils.format("&6(!)&cPlayer " + target.getName() + "isnt muted"));
+                sender.sendMessage(ChatUtils.format("&6(!)&cPlayer " + target.getName() + " isnt muted"));
             }
 
         }

@@ -1,5 +1,6 @@
 package me.shafi.moderator_plugin.commands;
 
+import me.shafi.moderator_plugin.Moderator_plugin;
 import me.shafi.moderator_plugin.utils.ChatUtils;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -21,20 +22,18 @@ public class UnBanCommand implements CommandExecutor {
 
         if(args.length >= 1){
             OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
-            if(!target.isBanned()){
-                sender.sendMessage(ChatUtils.format("&6(!)&cPlayer" + target.getName() + "is not banned"));
+            if(!Moderator_plugin.banManager.getBanStatus(target.getUniqueId().toString()).isBanned()){
+                sender.sendMessage(ChatUtils.format("&6(!)&c Player " + target.getName() + " is not banned"));
                 return true;
             }
 
             if(target.hasPlayedBefore()){
-                BanList banList = Bukkit.getBanList(BanList.Type.NAME);
-
-                banList.pardon(target.getName());
+                Moderator_plugin.banManager.unBanPlayer(target.getUniqueId().toString());
 
 
-                sender.sendMessage(ChatUtils.format("&6(!)&a" + target.getName() + " has been unbanned"));
+                sender.sendMessage(ChatUtils.format("&6(!)&a " + target.getName() + " has been unbanned"));
             }else{
-                sender.sendMessage(ChatUtils.format("&6(!)&cPlayer " + target.getName() + "does not exist"));
+                sender.sendMessage(ChatUtils.format("&6(!)&c Player " + target.getName() + "does not exist"));
             }
 
         }

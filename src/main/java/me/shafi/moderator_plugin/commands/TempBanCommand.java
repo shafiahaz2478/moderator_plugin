@@ -33,13 +33,9 @@ public class TempBanCommand implements CommandExecutor {
                 reason = ChatUtils.format( String.join(" ", Arrays.copyOfRange(args, 2, args.length)));
             }
             if(target.hasPlayedBefore()){
-                BanList banList = Bukkit.getBanList(BanList.Type.NAME);
-                long expiration = System.currentTimeMillis() + duration;
-
-
-                banList.addBan(target.getName(), ChatUtils.format("&c" + reason), new Date(expiration), sender.getName());
+                Moderator_plugin.banManager.banPlayer(target, duration , reason);
                 Moderator_plugin.logManager.logTempBan(target.getName() , duration , reason);
-                target.getPlayer().kickPlayer(ChatUtils.format("&6You been banned for " + DurationUtils.formatDuration(duration) +" for: &c" + reason));
+                target.getPlayer().kickPlayer(ChatUtils.format("&6 You have been banned for " + DurationUtils.formatDuration(duration) +"\nReason: &c" + reason));
                 sender.sendMessage(ChatUtils.format("&6(!)&a" + target.getName() + " has been banned for " + DurationUtils.formatDuration(duration) +" for: " + reason));
             }else{
                 sender.sendMessage(ChatUtils.format( "&6(!)&cPlayer " + target.getName() + "does not exist"));

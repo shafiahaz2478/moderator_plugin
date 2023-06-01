@@ -3,6 +3,8 @@ package me.shafi.moderator_plugin;
 import me.shafi.moderator_plugin.commands.*;
 import me.shafi.moderator_plugin.data.MySQL;
 import me.shafi.moderator_plugin.listener.PlayerChatEvent;
+import me.shafi.moderator_plugin.listener.PlayerLogin;
+import me.shafi.moderator_plugin.manager.BanManager;
 import me.shafi.moderator_plugin.manager.LogManager;
 import me.shafi.moderator_plugin.manager.MuteManager;
 import org.bukkit.Bukkit;
@@ -16,12 +18,14 @@ public final class Moderator_plugin extends JavaPlugin {
 
     public static MuteManager muteManager;
     public static LogManager logManager;
+    public static BanManager banManager;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
         registerCommands();
         getServer().getPluginManager().registerEvents(new PlayerChatEvent() , this);
+        getServer().getPluginManager().registerEvents(new PlayerLogin() , this);
 
 
         this.sql = new MySQL(this.getConfig().getString("SQL.host"),this.getConfig().getString("SQL.port"),
@@ -39,6 +43,7 @@ public final class Moderator_plugin extends JavaPlugin {
 
             muteManager = new MuteManager(this);
             logManager = new LogManager(this);
+            banManager = new BanManager(this);
         }
 
     }
