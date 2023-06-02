@@ -5,6 +5,7 @@ import me.shafi.moderator_plugin.data.MySQL;
 import me.shafi.moderator_plugin.listener.PlayerChatEvent;
 import me.shafi.moderator_plugin.listener.PlayerLogin;
 import me.shafi.moderator_plugin.manager.BanManager;
+import me.shafi.moderator_plugin.manager.BlackListManager;
 import me.shafi.moderator_plugin.manager.LogManager;
 import me.shafi.moderator_plugin.manager.MuteManager;
 import org.bukkit.Bukkit;
@@ -19,6 +20,7 @@ public final class Moderator_plugin extends JavaPlugin {
     public static MuteManager muteManager;
     public static LogManager logManager;
     public static BanManager banManager;
+    public static BlackListManager blackListManager;
 
     @Override
     public void onEnable() {
@@ -44,6 +46,7 @@ public final class Moderator_plugin extends JavaPlugin {
             muteManager = new MuteManager(this);
             logManager = new LogManager(this);
             banManager = new BanManager(this);
+            blackListManager = new BlackListManager(this);
         }
 
     }

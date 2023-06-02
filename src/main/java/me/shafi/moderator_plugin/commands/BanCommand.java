@@ -30,7 +30,9 @@ public class BanCommand implements CommandExecutor {
 
                 Moderator_plugin.banManager.banPlayer(target , reason);
                 Moderator_plugin.logManager.logBan(target.getName() , reason);
-                target.getPlayer().kickPlayer(ChatUtils.format("&6 You have been banned \nReason: &c" + reason));
+                if(target.isOnline()) {
+                    target.getPlayer().kickPlayer(ChatUtils.format("&6 You have been banned \nReason: &c" + reason));
+                }
                 sender.sendMessage( ChatUtils.format("&6(!)&a"+target.getName() + " has been banned for: " + reason));
             }else{
                 sender.sendMessage(ChatUtils.format("&6(!)&c Player " + target.getName() + "does not exist"));

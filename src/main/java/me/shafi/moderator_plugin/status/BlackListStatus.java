@@ -1,15 +1,12 @@
-package me.shafi.moderator_plugin;
+package me.shafi.moderator_plugin.status;
 
-public class BanStatus {
-
+public class BlackListStatus {
     private final boolean banned;
     private final String reason;
-    private final long duration;
 
-    public BanStatus(boolean banned, String reason , long duration) {
+    public BlackListStatus(boolean banned, String reason) {
         this.banned = banned;
         this.reason = reason;
-        this.duration = duration;
     }
 
     public boolean isBanned() {
@@ -20,7 +17,4 @@ public class BanStatus {
         return reason;
     }
 
-    public long getDuration(){
-        return duration;
-    }
 }

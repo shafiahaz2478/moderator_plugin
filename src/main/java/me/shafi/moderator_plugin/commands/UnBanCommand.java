@@ -2,14 +2,11 @@ package me.shafi.moderator_plugin.commands;
 
 import me.shafi.moderator_plugin.Moderator_plugin;
 import me.shafi.moderator_plugin.utils.ChatUtils;
-import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
-import java.util.Arrays;
 
 public class UnBanCommand implements CommandExecutor {
 
@@ -26,13 +23,16 @@ public class UnBanCommand implements CommandExecutor {
                 sender.sendMessage(ChatUtils.format("&6(!)&c Player " + target.getName() + " is not banned"));
                 return true;
             }
+            if(Moderator_plugin.blackListManager.getBlackListStatus(target).isBanned()){
+                Moderator_plugin.blackListManager.removeBlackList(target.getName());
+            }
 
             if(target.hasPlayedBefore()){
                 Moderator_plugin.banManager.unBanPlayer(target.getUniqueId().toString());
 
 
                 sender.sendMessage(ChatUtils.format("&6(!)&a " + target.getName() + " has been unbanned"));
-            }else{
+            } else{
                 sender.sendMessage(ChatUtils.format("&6(!)&c Player " + target.getName() + "does not exist"));
             }
 

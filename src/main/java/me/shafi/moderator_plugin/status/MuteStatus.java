@@ -1,4 +1,4 @@
-package me.shafi.moderator_plugin;
+package me.shafi.moderator_plugin.status;
 
 public class MuteStatus {
     private final boolean muted;

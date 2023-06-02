@@ -1,7 +1,7 @@
 package me.shafi.moderator_plugin.listener;
 
 import me.shafi.moderator_plugin.Moderator_plugin;
-import me.shafi.moderator_plugin.MuteStatus;
+import me.shafi.moderator_plugin.status.MuteStatus;
 import me.shafi.moderator_plugin.utils.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

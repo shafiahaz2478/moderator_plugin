@@ -1,7 +1,8 @@
 package me.shafi.moderator_plugin.listener;
 
-import me.shafi.moderator_plugin.BanStatus;
+import me.shafi.moderator_plugin.status.BanStatus;
 import me.shafi.moderator_plugin.Moderator_plugin;
+import me.shafi.moderator_plugin.status.BlackListStatus;
 import me.shafi.moderator_plugin.utils.ChatUtils;
 import me.shafi.moderator_plugin.utils.DurationUtils;
 import org.bukkit.entity.Player;
@@ -21,6 +22,11 @@ public class PlayerLogin implements Listener {
             }else {
                 event.disallow(PlayerLoginEvent.Result.KICK_BANNED , ChatUtils.format("&6 You have been banned \nReason: &c" + banStatus.getReason() ));
             }
+            return;
+        }
+        BlackListStatus blackListStatus = Moderator_plugin.blackListManager.getBlackListStatus(event.getRealAddress().getHostAddress());
+        if(blackListStatus.isBanned()){
+            event.disallow(PlayerLoginEvent.Result.KICK_BANNED , ChatUtils.format("&6 You have been banned \nReason: &c" + blackListStatus.getReason() ));
         }
     }
 }

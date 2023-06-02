@@ -1,9 +1,7 @@
 package me.shafi.moderator_plugin.manager;
 
-import me.shafi.moderator_plugin.BanStatus;
+import me.shafi.moderator_plugin.status.BanStatus;
 import me.shafi.moderator_plugin.Moderator_plugin;
-import me.shafi.moderator_plugin.MuteStatus;
-import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 import java.sql.PreparedStatement;

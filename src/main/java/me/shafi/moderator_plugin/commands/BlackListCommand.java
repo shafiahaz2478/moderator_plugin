@@ -26,15 +26,13 @@ public class BlackListCommand implements CommandExecutor {
                 reason = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
             }
             if(target.isOnline()){
-                BanList banList = Bukkit.getBanList(BanList.Type.IP);
-
-                banList.addBan(target.getAddress().getHostName(), ChatUtils.format("&c" + reason), null, sender.getName());
-                Bukkit.getBanList(BanList.Type.NAME).addBan(target.getName() , ChatUtils.format("&c" + reason) , null , sender.getName());
+                Moderator_plugin.blackListManager.blackList(target , reason);
+                Moderator_plugin.banManager.banPlayer(target , reason);
                 Moderator_plugin.logManager.logblackList(target.getName() , reason);
-                target.getPlayer().kickPlayer(ChatUtils.format("&6You been banned for: " + "&c" + reason));
+                target.getPlayer().kickPlayer(ChatUtils.format("&6 You have been banned \nReason: &c" + reason));
                 sender.sendMessage( ChatUtils.format("&6(!)&a"+target.getName() + " has been banned for: " + reason));
             }else{
-                sender.sendMessage(ChatUtils.format("&6(!)&c Player " + target.getName() + "does not exist"));
+                sender.sendMessage(ChatUtils.format("&6(!)&c Player " + target.getName() + "is not online"));
             }
 
         }
